@@ -24,7 +24,7 @@ class Course{
 class Student{
     String name;
     String studentID;
-    int maxCourses;
+    int maxAllowedCourses = 5;
     List <Course> registeredCourses;
 
     public Student(String name, String studentID){
@@ -52,12 +52,12 @@ class Registration{
         availableCourses.add(course);
     }
 
-    public void registerStudent(Student newStudent, Course course){
-        if(availableCourses.contains(course) && course.capacity > 0){
+    public void registerStudent(Student newStudent, Course course, int maxAllowedCourses){
+        if(availableCourses.contains(course) && course.capacity > 0 && maxAllowedCourses > 0){
             newStudent.registeredCourses.add(course);
             course.capacity --;
             System.out.println("Registration Succesful for " + newStudent.name + " in  " + course.title);
-            newStudent.maxCourses --;
+            newStudent.maxAllowedCourses --;
         }
 
         else{
@@ -113,7 +113,7 @@ public class RegistrationPortal {
 
 
         registrationSystem.displayAvailableCourses(s1);
-        registrationSystem.registerStudent(s1, c1);
+        registrationSystem.registerStudent(s1, c1, 5);
         registrationSystem.unRegisterStudent(s1, c1);
         registrationSystem.displayAvailableCourses(s1);
     }
